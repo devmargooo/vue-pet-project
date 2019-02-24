@@ -1,10 +1,13 @@
 <template>
 <ul>
+    
     <li 
         class="item"
         v-for="item in list"
         v-if="!item.disabled">
-        {{item.game_name}}
+        <router-link :to="`/game/${item.game_id}`">
+            {{item.game_name}}
+        </router-link>
     </li>
 </ul>
 </template>
@@ -23,7 +26,7 @@ export default {
             type: Array,
             required: true
         }
-    }
+    },
 }
 </script>
 
@@ -35,9 +38,20 @@ export default {
     padding: 10px;
     font-size: 18px;
     font-family: Helvetica, sans-serif;
+    
 }
 .item:hover {
     border-left: 4px solid red;
     cursor: pointer;
 }
+
+.item a,
+.item a:hover,
+.item a:visited,
+.item a:focus
+{
+    text-decoration: none;
+    color: black;
+}
+
 </style>

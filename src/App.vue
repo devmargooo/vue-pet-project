@@ -1,5 +1,5 @@
 <template>
-  <GamesList/>
+  <router-view></router-view>
 </template>
 
 <script>
