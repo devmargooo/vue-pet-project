@@ -16,7 +16,7 @@ export default new Vuex.Store({
      * Id текущей игры
      * @type {Array}
      */
-    game: ''
+    selectedGame: ''
   },
   mutations: {
     /**
@@ -27,11 +27,21 @@ export default new Vuex.Store({
       state.games = values
     },
     /**
+     * Устанвливает текущую игру
      * @param {Context} state
-     * @param {string} id
+     * @param {string} gameId
      */
-    game (state, id) {
-      state.games = id
+    selectGame (state, gameId) {
+      state.selectedGame = state.games.find(item => item.id === gameId)
+    },
+    /**
+     * Устанавливает карту доступных для игры видео
+     * @param {Context} state
+     * @param {string} gameId
+     */
+    gameVideoMap (state, gameId, map) {
+      const game = state.games.find(item => item.game_id === gameId)
+      game.map = map
     }
   },
   actions: {
@@ -44,11 +54,32 @@ export default new Vuex.Store({
         .then(response => commit('games', response.data))
         .catch(() => console.log(':('))
     },
-    selectGame ({ commit }) {
-
+    selectGame ({ commit }, id) {
+      commit('selectGame', id)
     },
-    setGameVideMap (map) {
-      console.log('!!!', map)
+    setGameVideoMap ({ commit }, id, map) {
+      commit('gameVideoMap', id, map)
+    },
+    async loadVideoMap ({ dispatch }, id) {
+      const monthMap = {}
+      const MONTHS_COUNT = 12
+      const MAX_VIDEO_PER_MONTH = 10
+      for (let month = 1; month <= MONTHS_COUNT; month++) {
+        const indexes = []
+        for (let index = 1; index <= MAX_VIDEO_PER_MONTH; index++) {
+          const url = `${api.game}${id}/${formatNumber(month)}/${formatNumber(index)}.mp4`
+          await axios.head(url)
+            .then(() => indexes.push(index))
+            .catch(() => { /* do nothing */ })
+        }
+        monthMap[month] = indexes.sort((a, b) => a > b)
+      }
+      console.log(monthMap)
+      dispatch('setGameVideoMap', id, monthMap)
     }
   }
 })
+
+function formatNumber (n) {
+  return ('0' + n).slice(-2)
+}

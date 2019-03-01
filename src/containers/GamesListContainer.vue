@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
 import GamesList from '../components/GamesList.vue';
 export default {
     components: {
@@ -12,11 +12,5 @@ export default {
     computed: {
         ...mapState(['games'])
     },
-    methods: {
-        ...mapActions(['loadGames'])
-    },
-    mounted() {
-        this.loadGames();
-    }
 }
 </script>

@@ -1,9 +1,9 @@
 <template>
 <ul>
-    
     <li 
         class="item"
         v-for="item in list"
+        :key="item.id"
         v-if="!item.disabled">
         <router-link :to="`/game/${item.game_id}`">
             {{item.game_name}}
