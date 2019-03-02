@@ -1,7 +1,7 @@
 <template>
 <ul>
     <li class="item" v-for="item in list">
-        <router-link :to="`/${formatNumber(item)}`">
+        <router-link :to="{ path: `${formatNumber(item)}`}" append>
             {{monthMap[item]}}
         </router-link>
     </li>

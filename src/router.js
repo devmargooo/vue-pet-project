@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import GamesList from './containers/GamesListContainer.vue'
+import GameMonth from './containers/GameMonthContainer.vue'
 import Game from './containers/GameContainer.vue'
 import store from './store'
 Vue.use(VueRouter)
@@ -18,6 +19,10 @@ const router = new VueRouter({
         store.commit('switchLoader')
         next()
       }
+    },
+    {
+      path: '/game/:id/:month',
+      component: GameMonth
     }
   ]
 })
