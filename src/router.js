@@ -13,10 +13,13 @@ const router = new VueRouter({
       path: '/game/:id',
       component: Game,
       beforeEnter: async (to, from, next) => {
-        store.commit('switchLoader')
-        await store.dispatch('loadVideoMap', +to.params.id)
         await store.dispatch('selectGame', +to.params.id)
-        store.commit('switchLoader')
+        console.log('SELECTED GAME ', store.state.selectedGame)
+        if (!store.state.selectedGame.map) {
+          store.commit('switchLoader')
+          await store.dispatch('loadVideoMap', +to.params.id)
+          store.commit('switchLoader')
+        }
         next()
       }
     },
@@ -25,6 +28,15 @@ const router = new VueRouter({
       component: GameMonth
     }
   ]
+})
+
+router.beforeEach(async (to, from, next) => {
+  if (!store.state.games.length) {
+    await store.dispatch('loadGames')
+  }
+  console.log('games loaded')
+  console.log(store.state.games)
+  next()
 })
 
 export default router

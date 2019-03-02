@@ -16,12 +16,6 @@ export default {
   computed: {
     ...mapState(['isLoaderShown'])
   },
-  methods: {
-    ...mapActions(['loadGames'])
-  },
-  mounted() {
-      this.loadGames();
-  }
 }
 </script>
 

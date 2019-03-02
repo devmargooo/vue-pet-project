@@ -37,6 +37,7 @@ export default new Vuex.Store({
      * @param {string} gameId
      */
     selectGame (state, gameId) {
+      console.log('GAMES IN MUTATIONS ', state.games)
       state.selectedGame = state.games.find(item => item.game_id === gameId)
     },
     /**
@@ -61,8 +62,8 @@ export default new Vuex.Store({
      * Загружает список игр
      * @param {Context} state
      */
-    loadGames ({ commit }) {
-      axios.get(api.games)
+    async loadGames ({ commit }) {
+      await axios.get(api.games)
         .then(response => commit('games', response.data))
         .catch(() => console.log(':('))
     },
