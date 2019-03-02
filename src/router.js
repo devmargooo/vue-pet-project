@@ -12,8 +12,10 @@ const router = new VueRouter({
       path: '/game/:id',
       component: Game,
       beforeEnter: async (to, from, next) => {
+        store.commit('switchLoader')
         await store.dispatch('loadVideoMap', +to.params.id)
         await store.dispatch('selectGame', +to.params.id)
+        store.commit('switchLoader')
         next()
       }
     }

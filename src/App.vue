@@ -1,14 +1,20 @@
 <template>
-  <router-view></router-view>
+<div>
+    <Loader v-if="isLoaderShown"/>
+    <router-view></router-view>
+</div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import GamesList from './containers/GamesListContainer.vue';
+import { mapActions, mapState } from 'vuex';
+import Loader from './components/Loader.vue';
 export default {
   name: 'app',
   components: {
-    GamesList
+    Loader
+  },
+  computed: {
+    ...mapState(['isLoaderShown'])
   },
   methods: {
     ...mapActions(['loadGames'])

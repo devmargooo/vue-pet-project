@@ -16,7 +16,12 @@ export default new Vuex.Store({
      * Id текущей игры
      * @type {Array}
      */
-    selectedGame: ''
+    selectedGame: '',
+    /**
+     * Признак отображения прелоадера
+     * @type {boolean}
+     */
+    isLoaderShown: false
   },
   mutations: {
     /**
@@ -42,6 +47,13 @@ export default new Vuex.Store({
     gameVideoMap (state, gameId, map) {
       const game = state.games.find(item => item.game_id === gameId)
       game.map = map
+    },
+    /**
+     * Переключает состояние прелоадера
+     * @param {Context} state
+     */
+    switchLoader (state) {
+      state.isLoaderShown = !state.isLoaderShown
     }
   },
   actions: {
