@@ -21,7 +21,8 @@ export default new Vuex.Store({
      * Признак отображения прелоадера
      * @type {boolean}
      */
-    isLoaderShown: false
+    isLoaderShown: false,
+    selectedMonth: 0
   },
   mutations: {
     /**
@@ -55,6 +56,10 @@ export default new Vuex.Store({
      */
     switchLoader (state) {
       state.isLoaderShown = !state.isLoaderShown
+    },
+    selectMonth (state, value) {
+      state.selectedMonth = value
+      console.log('SELECTED MONTH: ', state.selectedMonth)
     }
   },
   actions: {

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import isObjectEmpty from './helpers/isObjectEmpty'
 import GamesList from './containers/GamesListContainer.vue'
 import GameMonth from './containers/GameMonthContainer.vue'
 import Game from './containers/GameContainer.vue'
@@ -13,19 +14,23 @@ const router = new VueRouter({
       path: '/game/:id',
       component: Game,
       beforeEnter: async (to, from, next) => {
-        await store.dispatch('selectGame', +to.params.id)
-        console.log('SELECTED GAME ', store.state.selectedGame)
-        if (!store.state.selectedGame.map) {
-          store.commit('switchLoader')
-          await store.dispatch('loadVideoMap', +to.params.id)
-          store.commit('switchLoader')
-        }
+        await setGameData(+to.params.id)
         next()
       }
     },
     {
       path: '/game/:id/:month',
-      component: GameMonth
+      component: GameMonth,
+      beforeEnter: async (to, from, next) => {
+        console.log('&&&', store.state.selectedGame)
+        console.log('isObjEmpty: ', isObjectEmpty(store.state.selectedGame))
+        if (isObjectEmpty(store.state.selectedGame)) {
+          console.log('HERE!')
+          await setGameData(+to.params.id)
+        }
+        await store.commit('selectMonth', +to.params.month)
+        next()
+      }
     }
   ]
 })
@@ -38,5 +43,15 @@ router.beforeEach(async (to, from, next) => {
   console.log(store.state.games)
   next()
 })
+
+async function setGameData (gameId) {
+  await store.dispatch('selectGame', gameId)
+  console.log('SELECTED GAME ', store.state.selectedGame)
+  if (!store.state.selectedGame.map) {
+    store.commit('switchLoader')
+    await store.dispatch('loadVideoMap', gameId)
+    store.commit('switchLoader')
+  }
+}
 
 export default router
