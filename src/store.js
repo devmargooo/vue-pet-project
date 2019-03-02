@@ -13,10 +13,10 @@ export default new Vuex.Store({
      */
     games: [],
     /**
-     * Id текущей игры
-     * @type {Array}
+     * Текущая игра
+     * @type {Object}
      */
-    selectedGame: '',
+    selectedGame: {},
     /**
      * Признак отображения прелоадера
      * @type {boolean}
@@ -37,14 +37,14 @@ export default new Vuex.Store({
      * @param {string} gameId
      */
     selectGame (state, gameId) {
-      state.selectedGame = state.games.find(item => item.id === gameId)
+      state.selectedGame = state.games.find(item => item.game_id === gameId)
     },
     /**
      * Устанавливает карту доступных для игры видео
      * @param {Context} state
      * @param {string} gameId
      */
-    gameVideoMap (state, gameId, map) {
+    gameVideoMap (state, { gameId, map }) {
       const game = state.games.find(item => item.game_id === gameId)
       game.map = map
     },
@@ -69,10 +69,7 @@ export default new Vuex.Store({
     selectGame ({ commit }, id) {
       commit('selectGame', id)
     },
-    setGameVideoMap ({ commit }, id, map) {
-      commit('gameVideoMap', id, map)
-    },
-    async loadVideoMap ({ dispatch }, id) {
+    async loadVideoMap ({ commit }, id) {
       const monthMap = {}
       const MONTHS_COUNT = 12
       const MAX_VIDEO_PER_MONTH = 10
@@ -87,7 +84,7 @@ export default new Vuex.Store({
         monthMap[month] = indexes.sort((a, b) => a > b)
       }
       console.log(monthMap)
-      dispatch('setGameVideoMap', id, monthMap)
+      commit('gameVideoMap', { gameId: id, map: monthMap })
     }
   }
 })
