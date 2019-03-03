@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import isObjectEmpty from './helpers/isObjectEmpty'
 import GamesList from './containers/GamesListContainer.vue'
-import GameMonth from './containers/GameMonthContainer.vue'
+import GameVideo from './containers/GameVideoContainer.vue'
 import Game from './containers/GameContainer.vue'
 import store from './store'
 Vue.use(VueRouter)
@@ -20,7 +20,7 @@ const router = new VueRouter({
     },
     {
       path: '/game/:id/:month',
-      component: GameMonth,
+      component: GameVideo,
       beforeEnter: async (to, from, next) => {
         console.log('&&&', store.state.selectedGame)
         console.log('isObjEmpty: ', isObjectEmpty(store.state.selectedGame))

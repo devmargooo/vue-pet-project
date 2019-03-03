@@ -1,15 +1,15 @@
 <template>
-    <GameMonth :video="video"/>
+    <GameVideo :video="video"/>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 import formatNumber from '../helpers/formatNumber'
 import api from '../api.json';
-import GameMonth from '../components/GameMonth.vue';
+import GameVideo from '../components/GameVideo.vue';
 export default {
     components: {
-        GameMonth
+        GameVideo
     },
     computed: {
         ...mapState(['selectedGame', 'selectedMonth']),
