@@ -6,8 +6,14 @@
 </template>
 
 <script>
+/** 
+ * Страница-сообщение об отсутствии данных  
+ */
 export default {
     props: {
+        /** 
+         * Текст сообщения 
+         */
         text: {
             type: String,
             default: 'Something is wrong :( please return back'
