@@ -20,6 +20,7 @@ export default {
 </script>
 
 <style>
+/* Общие стили приложения */
 .item {
     display: block;
     border-left: 4px solid black;

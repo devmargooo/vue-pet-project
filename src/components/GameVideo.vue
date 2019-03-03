@@ -22,14 +22,15 @@ export default {
         EmptyData
     },
     props: {
+        /** 
+         * Массив ссылок на видео
+         * @type {string[]}
+         */
         video: {
             type: Array,
             default: () => []
         }
     },
-    mounted() {
-        console.log('VIDEO!!! ', this.video)
-    }
 }
 </script>
 

@@ -16,7 +16,10 @@
 </template>
 
 <script>
+
 /**
+ * Компонент отображает список игр
+ * 
  * @typedef {{game_id: number, game_name: string, disabled: boolean|undefined}} Game
  */
 

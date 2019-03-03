@@ -20,6 +20,9 @@ export default {
         }
     },
     methods: {
+        /**
+         * Собирает ссылки для видео и складывает их в массив
+         */
         buildUrls() {
             const videoIndexes = this.selectedGame.map[`${this.selectedMonth}`];
             const urls = [];
