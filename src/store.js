@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import formatNumber from './helpers/formatNumber'
 import api from './api.json'
 
 Vue.use(Vuex)
@@ -22,10 +23,15 @@ export default new Vuex.Store({
      * @type {boolean}
      */
     isLoaderShown: false,
+    /**
+     * Выбранный месяц
+     * @type {number}
+     */
     selectedMonth: 0
   },
   mutations: {
     /**
+     * Устанавливает список игр
      * @param {Context} state
      * @param {Array} values
      */
@@ -38,7 +44,6 @@ export default new Vuex.Store({
      * @param {string} gameId
      */
     selectGame (state, gameId) {
-      console.log('GAMES IN MUTATIONS ', state.games)
       state.selectedGame = state.games.find(item => item.game_id === gameId)
     },
     /**
@@ -57,9 +62,13 @@ export default new Vuex.Store({
     switchLoader (state) {
       state.isLoaderShown = !state.isLoaderShown
     },
+    /**
+     * Устанавливает текущий месяц
+     * @param {Context} state
+     * @param {number} value
+     */
     selectMonth (state, value) {
       state.selectedMonth = value
-      console.log('SELECTED MONTH: ', state.selectedMonth)
     }
   },
   actions: {
@@ -72,9 +81,10 @@ export default new Vuex.Store({
         .then(response => commit('games', response.data))
         .catch(() => console.log(':('))
     },
-    selectGame ({ commit }, id) {
-      commit('selectGame', id)
-    },
+    /**
+     * Получает заголовки потенциальных видео и строит карту доступных видео
+     * @param {Context} state
+     */
     async loadVideoMap ({ commit }, id) {
       const monthMap = {}
       const MONTHS_COUNT = 12
@@ -87,14 +97,9 @@ export default new Vuex.Store({
             .then(() => indexes.push(index))
             .catch(() => { /* do nothing */ })
         }
-        monthMap[month] = indexes.sort((a, b) => a > b)
+        monthMap[month] = indexes
       }
-      console.log(monthMap)
       commit('gameVideoMap', { gameId: id, map: monthMap })
     }
   }
 })
-
-function formatNumber (n) {
-  return ('0' + n).slice(-2)
-}

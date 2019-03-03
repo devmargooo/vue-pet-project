@@ -22,10 +22,7 @@ const router = new VueRouter({
       path: '/game/:id/:month',
       component: GameVideo,
       beforeEnter: async (to, from, next) => {
-        console.log('&&&', store.state.selectedGame)
-        console.log('isObjEmpty: ', isObjectEmpty(store.state.selectedGame))
         if (isObjectEmpty(store.state.selectedGame)) {
-          console.log('HERE!')
           await setGameData(+to.params.id)
         }
         await store.commit('selectMonth', +to.params.month)
@@ -39,14 +36,11 @@ router.beforeEach(async (to, from, next) => {
   if (!store.state.games.length) {
     await store.dispatch('loadGames')
   }
-  console.log('games loaded')
-  console.log(store.state.games)
   next()
 })
 
 async function setGameData (gameId) {
-  await store.dispatch('selectGame', gameId)
-  console.log('SELECTED GAME ', store.state.selectedGame)
+  store.commit('selectGame', gameId)
   if (!store.state.selectedGame) {
     return
   }
