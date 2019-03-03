@@ -12,6 +12,10 @@
 </template>
 
 <script>
+/** 
+ * Компонент, содержащий видео для игры по месяцам  
+ */
+
 import formatNumber from '../helpers/formatNumber'
 import EmptyData from './EmptyData.vue';
 
@@ -20,12 +24,18 @@ export default {
         EmptyData
     },
     props: {
+        /** 
+         * Список видео 
+         */
         map: {
             type: Object,
             required: true
         }
     },
     computed: {
+        /** 
+         * Фильтрует список видео, убирая пустые значения, и возвращает его в виде массива
+         */
         list() {
             return Object.keys(this.map)
                 .filter(index => this.map[index].length)
