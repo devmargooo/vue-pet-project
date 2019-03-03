@@ -84,6 +84,7 @@ export default new Vuex.Store({
     /**
      * Получает заголовки потенциальных видео и строит карту доступных видео
      * @param {Context} state
+     * @param {number} id
      */
     async loadVideoMap ({ commit }, id) {
       const monthMap = {}
