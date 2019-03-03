@@ -7,7 +7,7 @@
                 </video>
             </slide>
         </carousel>
-        <EmptyData v-else text="We not found video for this month :( Please return back"/>
+        <EmptyData v-else text="We could not found video for this month :( Please return back"/>
     </div>
 </template>
 

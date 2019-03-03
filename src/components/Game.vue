@@ -1,17 +1,24 @@
 <template>
-<ul>
-    <li class="item" v-for="item in list">
-        <router-link :to="{ path: `${formatNumber(item)}`}" append>
-            {{monthMap[item]}}
-        </router-link>
-    </li>
-    
-</ul>    
+<div>
+    <ul v-if="list.length">
+        <li class="item" v-for="item in list">
+            <router-link :to="{ path: `${formatNumber(item)}`}" append>
+                {{monthMap[item]}}
+            </router-link>
+        </li>  
+    </ul>
+    <EmptyData v-else text="We could not found video for this game :( Please return back"/>
+</div>   
 </template>
 
 <script>
 import formatNumber from '../helpers/formatNumber'
+import EmptyData from './EmptyData.vue';
+
 export default {
+    components: {
+        EmptyData
+    },
     props: {
         map: {
             type: Object,

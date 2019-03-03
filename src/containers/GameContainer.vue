@@ -1,5 +1,5 @@
 <template>
-<Game :map="selectedGame.map"/>
+<Game :map="map"/>
 </template>
 
 <script>
@@ -10,7 +10,12 @@ export default {
         Game
     },
     computed: {
-        ...mapState(['selectedGame'])
+        ...mapState(['selectedGame']),
+        map() {
+            return this.selectedGame && this.selectedGame.map
+                ? this.selectedGame.map
+                : []
+        }
     },
 }
 </script>

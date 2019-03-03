@@ -47,6 +47,9 @@ router.beforeEach(async (to, from, next) => {
 async function setGameData (gameId) {
   await store.dispatch('selectGame', gameId)
   console.log('SELECTED GAME ', store.state.selectedGame)
+  if (!store.state.selectedGame) {
+    return
+  }
   if (!store.state.selectedGame.map) {
     store.commit('switchLoader')
     await store.dispatch('loadVideoMap', gameId)

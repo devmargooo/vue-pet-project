@@ -1,7 +1,7 @@
 <template functional>
 <div class="loader-wrapper">
     <div class="loader"></div>
-    <div class="message">Мы загружаем список видео.<br/> Пожалуйста, дайте нам несколько секунд...</div>
+    <div class="message">We are loading video list<br/> Please wait...</div>
     <img class="pic" src="../assets/loading.gif"/>
 </div>
 </template>
