@@ -1,20 +1,25 @@
 <template>
-    <carousel class="carousel">
-        <slide v-for="item in video">
-            <video class="video" controls>
-                <source :src="item" type="video/mp4">
-            </video>
-        </slide>
-    </carousel>
+    <div>
+        <carousel v-if="video.length" class="carousel">
+            <slide v-for="item in video">
+                <video class="video" controls>
+                    <source :src="item" type="video/mp4">
+                </video>
+            </slide>
+        </carousel>
+        <EmptyData v-else text="We not found video for this month :( Please return back"/>
+    </div>
 </template>
 
 <script>
 import { Carousel, Slide } from 'vue-carousel';
+import EmptyData from './EmptyData.vue';
 
 export default {
     components: {
         Carousel,
-        Slide
+        Slide,
+        EmptyData
     },
     props: {
         video: {
