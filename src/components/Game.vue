@@ -7,7 +7,7 @@
             </router-link>
         </li>  
     </ul>
-    <EmptyData v-else text="We could not found video for this game :( Please return back"/>
+    <EmptyData v-else text="We could not find video for this game :( Please return back"/>
 </div>   
 </template>
 
