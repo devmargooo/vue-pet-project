@@ -4,7 +4,7 @@ import isObjectEmpty from './helpers/isObjectEmpty'
 import GamesList from './containers/GamesListContainer.vue'
 import GameVideo from './containers/GameVideoContainer.vue'
 import Game from './containers/GameContainer.vue'
-import store from './store'
+import store from './Store/Store'
 Vue.use(VueRouter)
 
 const router = new VueRouter({

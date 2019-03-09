@@ -3,6 +3,7 @@ export default {
   state: {
     /**
      * Список избранного
+     * @type {string[]}
      */
     favorites: []
   },

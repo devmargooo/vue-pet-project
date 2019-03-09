@@ -21,6 +21,10 @@ export default {
         RemoveIcon
     },
     props: {
+        /** 
+         * Список избранного 
+         * @type {string[]}
+         */
         favorites: {
             type: Array,
             default: () => []
@@ -47,11 +51,13 @@ h2 {
 .favorites__item {
     display: block;
     position: relative;
+    overflow-x: hidden;
 }
 .video {
-    width: 400px;
-    height: 250px;
+    width: 375px;
+    height: 220px;
     margin: 10px auto;
+    display: block;
 }
 .icon {
     position: absolute;

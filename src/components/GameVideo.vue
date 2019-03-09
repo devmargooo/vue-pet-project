@@ -37,6 +37,10 @@ export default {
             type: Array,
             default: () => []
         },
+        /** 
+         * Список избранного 
+         * @type {string[]}
+         */
         favorites: {
             type: Array,
             default: () => []
