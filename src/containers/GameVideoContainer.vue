@@ -1,9 +1,13 @@
 <template>
-    <GameVideo :video="video"/>
+    <GameVideo 
+        :video="video"
+        :favorites="favorites"
+        @add="push"
+        @remove="remove"/>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import formatNumber from '../helpers/formatNumber'
 import api from '../api.json';
 import GameVideo from '../components/GameVideo.vue';
@@ -13,6 +17,7 @@ export default {
     },
     computed: {
         ...mapState(['selectedGame', 'selectedMonth']),
+        ...mapState('Favorites', ['favorites']),
         video() {
             return this.selectedGame.map[`${this.selectedMonth}`] 
                 ? this.buildUrls()
@@ -20,6 +25,7 @@ export default {
         }
     },
     methods: {
+        ...mapMutations('Favorites', ['push', 'remove']),
         /**
          * Собирает ссылки для видео и складывает их в массив
          */
@@ -30,7 +36,7 @@ export default {
                 urls.push(`${api.game}${this.selectedGame.game_id}/${formatNumber(this.selectedMonth)}/${formatNumber(videoIndexes[i])}.mp4`)
             }
             return urls;
-        }
+        },
     }
  }
 </script>

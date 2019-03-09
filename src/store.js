@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import formatNumber from './helpers/formatNumber'
 import api from './api.json'
+import Favorites from './FavoritesStore'
 
 Vue.use(Vuex)
 
@@ -102,5 +103,8 @@ export default new Vuex.Store({
       }
       commit('gameVideoMap', { gameId: id, map: monthMap })
     }
+  },
+  modules: {
+    Favorites
   }
 })

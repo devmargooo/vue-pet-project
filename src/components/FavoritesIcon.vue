@@ -1,6 +1,14 @@
 <template>
-    <img v-if="isChecked" class="icon" src="../assets/favorites_checked.png"/>
-    <img v-else class="icon" src="../assets/favorites.png"/>
+    <img 
+        v-if="isChecked" 
+        class="icon" 
+        @click="$emit('remove')"
+        src="../assets/favorites_checked.png"/>
+    <img 
+        v-else
+        class="icon"
+        @click="$emit('add')"
+        src="../assets/favorites.png"/>
 </template>
 
 <script>
@@ -27,5 +35,7 @@ export default {
 .icon {
     width: 20px;
     height: 20px;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 5px;
 }
 </style>
