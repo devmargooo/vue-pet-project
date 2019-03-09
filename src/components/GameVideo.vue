@@ -54,6 +54,7 @@ export default {
 .carousel {
     width: 900px;
     margin: 150px auto 0;
+    padding: 0 9px;
 }
 .video {
     width: 400px;
@@ -66,9 +67,5 @@ export default {
     position: absolute;
     left: 15px;
     top: 10px;
-}
-.div {
-    height: 250px;
-    background: red;
 }
 </style>

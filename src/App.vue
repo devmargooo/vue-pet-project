@@ -1,17 +1,23 @@
 <template>
 <div>
     <Loader v-if="isLoaderShown"/>
-    <router-view></router-view>
+    <div class="app">
+        <router-view class="app__content"></router-view>
+        <Favorites class="app__favorites"/>
+    </div>
 </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
 import Loader from './components/Loader.vue';
+import Favorites from './containers/FavoritesContainer.vue';
+
 export default {
   name: 'app',
   components: {
-    Loader
+    Loader,
+    Favorites
   },
   computed: {
     ...mapState(['isLoaderShown'])
@@ -20,6 +26,16 @@ export default {
 </script>
 
 <style>
+.app {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+}
+.app__favorites {
+    width: 400px;
+    overflow-y: auto;
+    margin-right: 10px;
+}
 /* Общие стили приложения */
 .item {
     display: block;
