@@ -6,20 +6,27 @@
             <video class="video" controls>
                 <source :src="item" type="video/mp4">
             </video>
+            <RemoveIcon
+                class="icon"
+                @remove="$emit('remove', item)"/>
         </li>
     </ul>
 </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            favorites: {
-                type: Array,
-                default: () => []
-            }
+import RemoveIcon from './RemoveIcon.vue'
+export default {
+    components: {
+        RemoveIcon
+    },
+    props: {
+        favorites: {
+            type: Array,
+            default: () => []
         }
     }
+}
 </script>
 
 <style scoped>
@@ -39,10 +46,16 @@ h2 {
 }
 .favorites__item {
     display: block;
+    position: relative;
 }
 .video {
     width: 400px;
     height: 250px;
     margin: 10px auto;
+}
+.icon {
+    position: absolute;
+    left: 5px;
+    top: 30px;
 }
 </style>

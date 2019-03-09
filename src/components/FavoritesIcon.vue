@@ -20,14 +20,6 @@ export default {
             default: false
         }
     },
-    computed: {
-        /** путь до картинки */
-        imgSrc() {
-            return this.isChecked
-            ? '/img/favorites_checked.png'
-            : './img/favorites.png'
-        }
-    },
 }
 </script>
 
@@ -37,5 +29,6 @@ export default {
     height: 20px;
     background: rgba(255, 255, 255, 0.4);
     padding: 5px;
+    cursor: pointer;
 }
 </style>

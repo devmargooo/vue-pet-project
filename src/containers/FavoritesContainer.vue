@@ -1,9 +1,11 @@
 <template>
-    <Favorites :favorites="favorites"/>
+    <Favorites 
+        :favorites="favorites"
+        @remove="remove"/>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import Favorites from '../components/Favorites.vue'
 export default {
   components: {
@@ -11,6 +13,9 @@ export default {
   }, 
   computed: {
       ...mapState('Favorites', ['favorites'])
+  },
+  methods: {
+      ...mapMutations('Favorites', ['remove']),
   }
 }
 </script>
