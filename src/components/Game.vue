@@ -16,8 +16,8 @@
  * Компонент, содержащий видео игры по месяцам  
  */
 
-import formatNumber from '../helpers/formatNumber'
-import monthMap from '../helpers/monthMap'
+import formatNumber from '../helpers/formatNumber';
+import monthMap from '../helpers/monthMap';
 import EmptyData from './EmptyData.vue';
 
 export default {

@@ -36,6 +36,7 @@ router.beforeEach(async (to, from, next) => {
   if (!store.state.games.length) {
     await store.dispatch('loadGames')
   }
+  setBreadcrumbs(to.path)
   next()
 })
 
@@ -49,6 +50,24 @@ async function setGameData (gameId) {
     await store.dispatch('loadVideoMap', gameId)
     store.commit('switchLoader')
   }
+}
+
+function setBreadcrumbs (url) {
+  console.log('url! ', url)
+  const arr = url.split('/')
+  const gameId = arr.indexOf('game') + 1
+  if (!gameId) { // в урле нет ид игры
+    store.dispatch('Breadcrumbs/setBreadcrumbs')
+    return
+  }
+  const monthId = gameId + 1 // месяц в урле следует за id игры
+  console.log('arr[monthId]   ', arr[monthId])
+  if (!arr[monthId]) {
+    store.dispatch('Breadcrumbs/setBreadcrumbs', { gameId: +arr[gameId] })
+    return
+  }
+  console.log('full: ', +arr[gameId], '      ', +arr[monthId])
+  store.dispatch('Breadcrumbs/setBreadcrumbs', { gameId: +arr[gameId], monthId: +arr[monthId] })
 }
 
 export default router
