@@ -4,6 +4,7 @@ import axios from 'axios'
 import formatNumber from '../helpers/formatNumber'
 import api from '../api.json'
 import Favorites from './FavoritesStore'
+import Breadcrumbs from './BreadcrumbsStore'
 
 Vue.use(Vuex)
 
@@ -105,6 +106,7 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    Favorites
+    Favorites,
+    Breadcrumbs
   }
 })

@@ -61,7 +61,7 @@ h2 {
 }
 .icon {
     position: absolute;
-    left: 5px;
-    top: 30px;
+    left: 20px;
+    top: 20px;
 }
 </style>
